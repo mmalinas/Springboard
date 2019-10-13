@@ -1,0 +1,17 @@
+<!-- predictor.html file -->
+<!DOCTYPE html>
+<html lang="en">
+<form action="/">
+	<center>
+		<input align = "center" type="text" name="title_in" autofocus="autofocus" value="{{x_input}}" maxlength="500" id="rcorners2">
+	</center>
+</p>
+
+	<center>
+	<input align="center" type="submit" value="Submit" method="get" id='rcorners1'>
+</center>
+</form>
+
+{{ title_in }} <br>
+Not the Onion probability: {{ prediction[0]['prob'] }} <br>
+The Onion probability: {{ prediction[1]['prob'] }}
