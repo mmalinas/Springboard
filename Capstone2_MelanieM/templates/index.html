@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Is it the Onion?</title>
+
+  <!-- Bootstrap core CSS -->
+  <!-- <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all"> -->
+  <!-- <link href="{{ url_for('static', filename='templates/bootstrap/css/bootstrap.min.css') }}" /> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" type="text/css">
+
+</head>
+
+<body>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5">Is it the Onion?</h1>
+        <p> I trained a machine learning model to tell the difference between posts in the subreddit r/nottheonion (where people post real news articles that they think sound like articles from the Onion) and actual titles from the Onion from r/TheOnion. Paste a title from /r/TheOnion or r/nottheonion in this box to see the likelihood of that title being in each subreddit. You can also try it with other words or phrases!</p>
+          <form action="/">
+            <center>
+              <input align = "center" type="text" name="title_in" autofocus="autofocus" value="{{x_input}}" maxlength="500" id="rcorners2" size="50">
+             </center>
+            </p>
+
+        <center>
+            <input align="center" type="submit" value="Submit" method="get" id='rcorners1'>
+        </center>
+        </form>
+      <br>
+      <p>Input: {{ title_in }} </p>
+      <p>/r/nottheonion probability: {{ prediction[0]['prob'] }} </p>
+      <p>/r/TheOnion probability: {{ prediction[1]['prob'] }} </p>
+      <br>
+
+  <!-- core JavaScript -->
+  <script src="{{ url_for('static', filename='jquery/jquery.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- <script src="templates/jquery/jquery.slim.min.js"></script> -->
+  <!-- <script src="templates/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+</body>
+
+</html>
