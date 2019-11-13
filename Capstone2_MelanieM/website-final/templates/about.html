@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Is it the Onion?</title>
+
+  <!-- Bootstrap core CSS -->
+  <!-- <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all"> -->
+  <!-- <link href="{{ url_for('static', filename='templates/bootstrap/css/bootstrap.min.css') }}" /> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" type="text/css">
+
+</head>
+
+  <!-- Navigation -->
+  <ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" href="/">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="/about">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/contact">Contact</a>
+  </li>
+</ul>
+
+<body>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+      <h1 class="mt-5">About the Project</h1>
+      <p>The issue of real news vs. fake news has come under increasing scrutiny in American society over the last few years. It is a huge problem that many data scientists are currently working on. I wanted to address a possibly related problem: detecting satirical news. The Onion, a satirical news website, has become very popular in the past several years, and I have often seen people on social media who sometimes don’t realize that the Onion is satirical and believe that it is true. On the website Reddit, there is a message board (subreddit) that is devoted solely to posting real news articles that people think sound like Onion articles. For this project I decided to create a machine learning model that could distinguish between posts on this subreddit, r/nottheonion, from posts on the subreddit r/TheOnion, which posts Onion articles. I also wanted to see how well you can distinguish between the Onion and regular news from r/news.</p>
+
+      <p>I obtained my data using PRAW, the Python Reddit API Wrapper. PRAW made it very easy to access the Reddit data. I was able to access the top 1000 (approximately) posts from r/nottheonion, r/TheOnion, and r/news and save them as CSVs. I decided to do my analysis solely on the headlines and not on the actual text of the articles, because oftentimes people only look at the headlines.</p>
+
+      <p>I then used various methods of natural language processing (NLP) to process the data and get it ready for the machine learning model. I primarily used the NLP libraries NLTK and spaCy to process the data. With spaCy, I did something called named entity recognition, which is when you classify “named entities”, i.e. people, places, organizations, etc. spaCy’s libraries are statistical neural network models. Using spaCy, I identified the named entities and their named entity categories and removed them from each headline.</p>
+
+      <p>In order to process the headlines without the named entities, I took several steps. I first made the headlines all lowercase, removed punctuation (using regular expressions), and removed numbers (also using regular expressions). I then tokenized each headline using NLTK, splitting up the headline into word tokens. Then, for every word in the list of word tokens, I used NLTK to lemmatize the word. Lemmatization aims to reduce a word to its base form by getting rid of inflection. I chose lemmatization over stemming because stemming often produces tokens that are not actually words, whereas lemmatization always returns valid words. I then used NLTK to remove stopwords, which are very common words such as “it”, “and”, “the”, etc. which do not really give information.</p>
+
+      <p>I then took the named entities that I had identified using spaCy and added them back to each title along with their named entity types, so that I could use all of the information to classify the headlines.</p>
+
+      <p>I then created a machine learning model that would learn to distinguish between Onion headlines and either r/news headlines or r/nottheonion headlines. I decided to use a Naive Bayes model, which is commonly used in the NLP field and is simple and easy to work with. I implemented Naive Bayes in scikit-learn. I optimized for the best alpha hyperparameter using a custom CV score function which I defined and attempting to optimize the F1 score. Using an alpha of 1, I achieved an accuracy on the training data of 0.85 and an accuracy on the testing data of 0.75, with an F1 score of 0.72, for Onion vs. nottheonion headlines. I then decided to test whether there would be an improvement if I used bigrams instead of just single tokens. I found that this was a slight improvement: though the accuracy on the training and test data was the same, the F1 score for bigrams was 0.73.</p>
+
+      <p>I then trained another Naive Bayes classifier to distinguish between Onion headlines and headlines from r/news, i.e. headlines that do not necessarily sound like satirical news. Doing this with bigrams in a similar manner to the r/nottheonion headlines, I found that this classifier was even better at distinguishing between Onion headlines and real news headlines than the classifier that distinguished between Onion headlines and nottheonion headlines: with an alpha of 0.1, the accuracy on the training data was 0.88 and the accuracy on the test data was 0.81, with an F1 score of 0.79. This means that it is even easier to distinguish between Onion headlines and regular news headlines, which is perhaps unsurprising.</p>
+
+      <p>The model that I have deployed here is for r/TheOnion vs. r/nottheonion.</p>
+
+  <!-- core JavaScript -->
+  <script src="{{ url_for('static', filename='jquery/jquery.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- <script src="templates/jquery/jquery.slim.min.js"></script> -->
+  <!-- <script src="templates/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+</body>
+
+</html>

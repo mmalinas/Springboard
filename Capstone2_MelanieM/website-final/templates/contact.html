@@ -20,13 +20,13 @@
   <!-- Navigation -->
   <ul class="nav nav-pills">
   <li class="nav-item">
-    <a class="nav-link active" href="/">Home</a>
+    <a class="nav-link" href="/">Home</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/about">About</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/contact">Contact</a>
+    <a class="nav-link active" href="/contact">Contact</a>
   </li>
 </ul>
 
@@ -36,24 +36,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <img src="{{url_for('static', filename='Onion_white_background.jpg')}}" alt="Onion image" width="400" height="267"/>
-        <h1 class="mt-5">Is it the Onion?</h1>
-        <p> I trained a machine learning model to tell the difference between headlines in the subreddit r/nottheonion (where people post real news articles that they think sound like articles from the Onion) and actual headlines from the Onion from r/TheOnion. Paste a headline from /r/TheOnion or r/nottheonion in this box to see the likelihood of that headline being in each subreddit. You can also try it with other words or phrases, as well as regular news headlines!</p>
-          <form action="/">
-            <center>
-              <input align = "center" type="text" name="title_in" autofocus="autofocus" value="{{x_input}}" maxlength="500" id="rcorners2" size="50">
-             </center>
-            </p>
-
-        <center>
-            <input align="center" type="submit" value="Submit" method="get" id='rcorners1'>
-        </center>
-        </form>
-      <br>
-      <p>Input: {{ title_in }} </p>
-      <p>/r/nottheonion probability: {{ prediction[0]['prob'] }} </p>
-      <p>/r/TheOnion probability: {{ prediction[1]['prob'] }} </p>
-      <br>
+      <h1 class="mt-5">Contact Me</h1>
+      <p>I received my PhD in Biophysics from Stanford University in June 2019. Check out my <a href="https://github.com/mmalinas/">Github</a> and my <a href="https://www.linkedin.com/in/melanie-malinas/">LinkedIn</a>, or <a href="mailto: melaniemalinas@gmail.com">email me</a>.
 
   <!-- core JavaScript -->
   <script src="{{ url_for('static', filename='jquery/jquery.slim.min.js') }}"></script>

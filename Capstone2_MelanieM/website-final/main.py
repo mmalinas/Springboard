@@ -40,6 +40,14 @@ def predict():
                                      title_in=x_input,
                                      prediction=predictions)
 
+@app.route("/about")
+def about():
+  return flask.render_template("about.html")
+
+@app.route("/contact")
+def contact():
+    return flask.render_template("contact.html")
+
 # Start the server, continuously listen to requests.
 if __name__=="__main__":
     clf = pickle_util.load_clf('clf_bigrams_pickled')
